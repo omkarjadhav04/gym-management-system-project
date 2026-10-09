@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gym Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        form { margin-bottom: 20px; }
+        input, select, button { padding: 8px; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Gym Dashboard</h2>
+    <a href="/logout">Logout</a>
+
+    <h3>Register Member</h3>
+    <form method="POST">
+        <input type="text" name="name" placeholder="Member Name" required>
+        <input type="text" name="phone" placeholder="Phone">
+        <input type="text" name="plan" placeholder="Plan (e.g., Monthly)">
+        <select name="status">
+            <option value="Pending">Pending</option>
+            <option value="Clear">Clear</option>
+        </select>
+        <button type="submit">Add Member</button>
+    </form>
+
+    <h3>Member List</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Plan</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        {% for m in members %}
+        <tr>
+            <td>{{ m.name }}</td>
+            <td>{{ m.phone }}</td>
+            <td>{{ m.plan }}</td>
+            <td>{{ m.payment_status }}</td>
+            <td><a href="/update/{{ m.id }}">Toggle Status</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
